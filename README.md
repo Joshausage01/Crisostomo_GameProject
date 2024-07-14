@@ -1,5 +1,5 @@
 # Crisostomo_GameProject
- Text turn based combat system (still have many rooms for improvement)
+ Text turn based combat system (still have many rooms for improvement) READ THIS IN CODE!!!
 
 A simple text turn-based combat system
 
