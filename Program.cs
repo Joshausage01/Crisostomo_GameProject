@@ -7,6 +7,7 @@ namespace Crisostomo_GameProject
         public static Unit playerUnit;
         public static Unit enemyUnit;
         public static List<Unit> enemies;
+        public static List<string> defeatedEnemies = new List<string>();
         public static bool IsGameOver = false;       // Set game over
         static void Main(string[] args)
         {
@@ -106,11 +107,14 @@ namespace Crisostomo_GameProject
 
                 Console.WriteLine($"As the last monster falls, you stand victorious, {playerUnit.unitName}, a survivor of the abyss.");
                 Console.WriteLine("Yet, in the distance, a shadow looms. You sense that this is only the beginning.");
-                Console.WriteLine("Greater challenges and darker foes await. Your journey is far from over.");
+                Console.WriteLine("Greater challenges and darker foes await. Your journey is far from over.\n");
 
                 Console.ReadKey();
                 Console.Clear();
-                Console.WriteLine("Thank you for playing the game...  - J.C");
+
+                Gameplay.InitiateGameSummary();
+
+                Console.WriteLine("\nThank you for playing the game...  - J.C");
             }
         }
     }

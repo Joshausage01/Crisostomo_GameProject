@@ -28,6 +28,7 @@ namespace Crisostomo_GameProject
                     // Check player and enemy condition then break while-loop
                     if (Program.playerUnit.IsDead || Program.enemyUnit.IsDead || Program.IsGameOver)
                     {
+
                         break;
                     }
 
@@ -53,7 +54,7 @@ namespace Crisostomo_GameProject
                             break;
                         case 2:
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
-                            Console.WriteLine($"{Program.enemyUnit.unitName} have missed their opportunity to take actions");
+                            Console.WriteLine($"{Program.enemyUnit.unitName}' attack missed its mark! An opportunity arise.");
                             Console.ResetColor();
                             break;
                     }
@@ -66,8 +67,11 @@ namespace Crisostomo_GameProject
                     break;
                 }
 
+                Console.WriteLine($"\n[ {Program.playerUnit.unitName} defeated {Program.enemyUnit.unitName}! ]");
+                // Adds defeated enemies in another List
+                Program.defeatedEnemies.Add(Program.enemyUnit.unitName);
+
                 // Player status upgrade or Level Up
-                Console.WriteLine($"[ {Program.playerUnit.unitName} defeated {Program.enemyUnit.unitName}! ]");
                 Program.playerUnit.StatsUP(Program.playerUnit);
                 Console.WriteLine($"{Program.playerUnit.unitName}  HP: {Program.playerUnit.HP}+20  Attack: {Program.playerUnit.AP}+4  Heal: {Program.playerUnit.HealPR}+4");
                 Console.ReadKey();
@@ -96,12 +100,6 @@ namespace Crisostomo_GameProject
             string action = Console.ReadLine()?.ToLower();   //read input and convert to lower case
             Console.ResetColor();
 
-            // Input invalidation
-            if (string.IsNullOrEmpty(action) || action.Length != 1)
-            {
-                Console.WriteLine("Invalid input. Skipped a turn!");
-            }
-
             // Action executions
             switch (action)
             {
@@ -114,16 +112,27 @@ namespace Crisostomo_GameProject
                     Program.playerUnit.Heal();
                     break;
                 case "g":
-                    //giving up logic
+                    //Surrender logic
+                    Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("\nYou run at the sight of the monster, what a cowardly hero  :)");
                     Console.ResetColor();
 
                     // Set the game over flag
-                    Program.IsGameOver = true;  
+                    Program.IsGameOver = true;
+
+                    InitiateGameSummary();
                     break;
                 default:
-                    Console.WriteLine("Invalid input. Skipped a turn!");
+                    // Input invalidation
+                    if (string.IsNullOrEmpty(action) || action.Length != 1)
+                    {
+                        Console.WriteLine("Invalid input. Skipped a turn!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Skipped a turn!");
+                    }
                     break;
             }
         }
@@ -146,6 +155,7 @@ namespace Crisostomo_GameProject
                 Console.WriteLine("**|| Boss monster appears!!! ||**");
                 Console.WriteLine("  =============================");
                 Console.ResetColor();
+                Console.WriteLine("\n-------------------------------------------------------------------------------");
                 Console.ReadKey();
             }
             else if (i == 1)
@@ -155,6 +165,7 @@ namespace Crisostomo_GameProject
                 Console.WriteLine("You walked along the path connected to the chamber where you slain the shadow goblin...");
                 Console.WriteLine("You entered a passage way, you felt a presence stalking you.");
                 Console.WriteLine("You encountered a [Night Stalker]. Get Ready for combat");
+                Console.WriteLine("\n-------------------------------------------------------------------------------");
                 Console.ReadKey();
             }
             else
@@ -167,6 +178,36 @@ namespace Crisostomo_GameProject
                 Console.WriteLine("\n-------------------------------------------------------------------------------");
                 Console.ReadKey();
             }
+        }
+        public static void InitiateGameSummary()
+        {
+            // Game Summary
+            Console.ForegroundColor= ConsoleColor.DarkGreen;  
+            Console.WriteLine("==========================================");
+            Console.WriteLine("              GAME SUMMARY                ");
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Current Status:");
+            Console.WriteLine($"Player: {Program.playerUnit.unitName}");
+            Console.WriteLine($"HP: {Program.playerUnit.HP}  Attack: {Program.playerUnit.AP}  Heal: {Program.playerUnit.HealPR}");
+            Console.WriteLine();
+            Console.WriteLine($"Enemy: {Program.enemyUnit.unitName}");
+            Console.WriteLine($"HP: {Program.enemyUnit.HP}  Attack: {Program.enemyUnit.AP}  Heal: {Program.enemyUnit.HealPR}");
+            Console.WriteLine("==========================================");
+            Console.WriteLine("ENEMIES SLAIN:");
+
+            if (Program.defeatedEnemies.Count == 0)
+            {
+                Console.WriteLine("\tNONE");
+            }
+            else
+            {
+                for (int i = 0; i < Program.defeatedEnemies.Count; i++)
+                {
+                    Console.WriteLine($"- {Program.defeatedEnemies[i]}");
+                }
+            }
+            Console.WriteLine("==========================================");
+            Console.ResetColor();
         }
     }
 }
