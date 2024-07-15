@@ -12,6 +12,7 @@ Class descriptions:
 
 [Unit.cs]
   -It is where the fields of the Units are coded in that acts as the characteristics of the units
+  -Unit constructor is what sets the paramaters for a character unit
   -There are methods here which acts as the actions of the units
      -Attacking method where the attack logic of the units is in
      -Heal method where the heal logic of the units is in
@@ -20,6 +21,8 @@ Class descriptions:
 [Gameplay.cs]
   -It is where all the flow of the game is constructed
   -MainGameplay method
+     -For-loop is for the cycle of the initializations of enemies
+     -Nest loops and if-else for the whole run of the game
      -(Player turn)
         -choose actions
         -execute actions
