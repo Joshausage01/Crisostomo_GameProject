@@ -1,9 +1,11 @@
 # Crisostomo_GameProject
  Text turn based combat system (still have many rooms for improvement) READ THIS IN CODE!!!
 
-A simple text turn-based combat system
 
-Class descriptions:
+## Project Overview
+This project implements a basic text-based combat system where the player faces multiple enemies in sequence.
+
+###Class descriptions:
 [Program.cs]
   -Main method
   -StartUp method where the game exposition is located
